@@ -8,6 +8,7 @@ public class Category {
 
     private int id;
     private String name;
+    private int totalOfProduct;
 
     public Category() {
     }
@@ -37,4 +38,11 @@ public class Category {
         this.name = name;
     }
 
+    public int getTotalOfProduct() {
+        return totalOfProduct;
+    }
+
+    public void setTotalOfProduct(int totalOfProduct) {
+        this.totalOfProduct = totalOfProduct;
+    }
 }

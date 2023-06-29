@@ -17,18 +17,18 @@ import java.util.logging.Logger;
  * @author s
  */
 public class DBContext {
+
     private final String serverName = "localhost";
     private final String dbName = "ShopGuitar";
     private final String portNumber = "1433";
-    private final String userID = "sa";
-    private final String password = "12345678";
-
+    private final String userID = "sa1";
+    private final String password = "1";
 
     public Connection getConnection() {
 
         Connection connection = null;
         try {
-            Class.forName("com.micrrosoft.sqlserver.jdbc.SQLServerDriver");
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String url = "jdbc:sqlserver://" + serverName + ":" + portNumber + ";databaseName=" + dbName;
             return DriverManager.getConnection(url, userID, password);
         } catch (ClassNotFoundException | SQLException e) {
@@ -76,11 +76,5 @@ public class DBContext {
                 Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, e);
             }
         }
-    }
-}
- class Main {
-      public static void main(String[] args) {
-    
-          System.out.println(new DBContext().getConnection());
     }
 }

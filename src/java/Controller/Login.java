@@ -4,10 +4,9 @@ package Controller;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-import DaoImpl.UserDaoImpl;
+import DaoImpl.UserDao;
 import Model.User;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -32,12 +31,14 @@ public class Login extends HttpServlet {
             String email = "";
             String password = "";
             Cookie ck[] = request.getCookies();
-            for (Cookie ck1 : ck) {
-                if (ck1.getName().equalsIgnoreCase("email")) {
-                    email = ck1.getValue();
-                }
-                if (ck1.getName().equalsIgnoreCase("password")) {
-                    password = ck1.getValue();
+            if (ck !=  null) {
+                for (Cookie ck1 : ck) {
+                    if (ck1.getName().equalsIgnoreCase("email")) {
+                        email = ck1.getValue();
+                    }
+                    if (ck1.getName().equalsIgnoreCase("password")) {
+                        password = ck1.getValue();
+                    }
                 }
             }
             request.setAttribute("email", email);
@@ -57,8 +58,8 @@ public class Login extends HttpServlet {
     ) throws ServletException, IOException {
         User account = (User) request.getSession().getAttribute("user");
         if (account == null) {
-            UserDaoImpl userDao = new UserDaoImpl();
-            String email = request.getParameter("email").trim();
+            UserDao userDao = new UserDao();
+            String email = request.getParameter("email").trim().toLowerCase();
             String password = request.getParameter("password").trim();
             // check validate password
             if (!isValid(password)) {
@@ -66,20 +67,20 @@ public class Login extends HttpServlet {
                 request.setAttribute("password", password);
                 request.setAttribute("errorPassword", true);
                 request
-                        .getRequestDispatcher("common/login.jsp")
+                        .getRequestDispatcher("../common/login.jsp")
                         .forward(request, response);
             } else {
                 User userLogin = new User(email, password);
                 User user = userDao.login(userLogin);
                 if (user.getId() == 0) {
-                    request.setAttribute("login", false);
+                    request.setAttribute("login", true);
                     request.setAttribute("email", email);
                     request.setAttribute("password", password);
                     request
-                            .getRequestDispatcher("common/login.jsp")
+                            .getRequestDispatcher("/common/login.jsp")
                             .forward(request, response);
                 } else {
-                    if (request.getParameter("remember") != null) {
+                    if (Boolean.valueOf(request.getParameter("remember"))) {
                         Cookie userCookie = new Cookie("email", user.getEmail());
                         Cookie passCookie = new Cookie("password", user.getPassword());
                         userCookie.setMaxAge(60 * 60 * 24);

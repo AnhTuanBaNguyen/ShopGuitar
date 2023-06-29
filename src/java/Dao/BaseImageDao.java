@@ -9,7 +9,7 @@ import jakarta.servlet.http.Part;
 
 /**
  *
- * @author haimi
+ * @author user
  * @param <T>
  */
 public interface BaseImageDao<T> {

@@ -11,114 +11,20 @@
         <title>Login Form</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="img/favicon.ico" rel="icon">
+
+        <!-- Google Web Fonts -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
         <!-- Font Awesome -->
-        <link
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-            rel="stylesheet"
-            />
-        <!-- Google Fonts -->
-        <link
-            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-            rel="stylesheet"
-            />
-        <!-- MDB -->
-        <link
-            href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.css"
-            rel="stylesheet"
-            />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     </head>
     <body class="img js-fullheight" style="background-image: url(assets/img/bg.jpg); background-repeat: no-repeat; background-size: cover">
-        <section class="vh-100" style="background-color: #508bfc">
-            <div class="container py-5 h-100">
-                <div class="row d-flex justify-content-center align-items-center h-100">
-                    <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-                        <div class="card shadow-2-strong" style="border-radius: 1rem">
-                            <div class="card-body p-5 text-center">
-                                <form action="login" method="post">
-
-                                    <h3 class="mb-3">Sign in</h3>
-                                    <c:if test="${login == 'false'}">
-                                        <div class="alert alert-danger" role="alert">
-                                            Your email or password is incorrect!
-                                        </div>
-                                    </c:if>
-
-
-                                    <c:if test="${errorPassword == 'true'}">
-                                        <div class="alert alert-danger" role="alert"> 
-                                            Must contain at least one number and one uppercase and
-                                            lowercase letter and special characters, the length is 8-16
-                                            characters!</div>
-
-                                    </c:if>
-
-                                    <div class="form-outline mb-4">
-                                        <input
-                                            type="email"
-                                            required
-                                            id="email"
-                                            value="${email}" 
-                                            name="email"
-                                            class="form-control form-control-lg"
-                                            />
-                                        <label class="form-label" for="typeEmailX-2">Email</label>
-                                    </div>
-                                    <div class="form-outline mb-4 needs-validation" >
-                                        <input
-                                            type="password"
-                                            required
-                                            id="password"
-                                            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,16}$"
-                                            value="${password}" 
-                                            name="password"
-                                            class="form-control form-control-lg"
-                                            />
-                                        <label class="form-label" for="typePasswordX-2"
-                                               >Password</label
-                                        > 
-
-                                    </div>
-
-
-                                    <!-- Checkbox -->
-                                    <div class="d-flex justify-content-between mb-4">
-                                        <div class="form-check d-flex justify-content-star">
-                                            <input
-                                                class="form-check-input"
-                                                type="checkbox"
-                                                id="remember"
-                                                name="remember"
-                                                />
-                                            <label class="form-check-label" for="form1Example3">
-                                                Remember password
-                                            </label>
-                                        </div>
-
-                                        <div class="text-center">
-                                            <a
-                                                href="<%=request.getContextPath()%>/register"
-                                                class="text-black"
-                                                >Sign Up</a
-                                            >
-                                        </div>
-                                    </div>
-
-
-                                    <button class="btn btn-primary btn-lg btn-block" type="submit">
-                                        Login
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
         <section class="ftco-section">
-            <div class="container">
+            <div class="container mt-5">
                 <div class="row justify-content-center">
                     <div class="col-md-6 text-center mb-5">
                         <h2 class="heading-section">Login</h2>
@@ -130,7 +36,7 @@
 
                             <form action="login" class="signin-form needs-validation" novalidate method="post">
                                 <div class="form-group">
-                                    <input id="username" type="text" class="form-control" placeholder="Username" required value="${username}" name="username"/>
+                                    <input id="email" type="text" class="form-control" placeholder="Username" required value="${username}" name="email"/>
                                     <div class="valid-feedback">
                                         Looks good!
                                     </div>  
@@ -154,7 +60,7 @@
                                         Must contain at least one number and one uppercase and lowercase letter and special characters, the length is 8-16 characters
                                     </div> 
                                 </div>
-                                <div class="d-flex my-3  justify-content-between">
+                                <div class="d-flex my-3  ">
                                     <div class="form-check">
                                         <input
                                             type="checkbox"
@@ -166,31 +72,53 @@
                                             Remember Me
                                         </label>
                                     </div>
-                                    <a href="<%=request.getContextPath()%>/reset_password">Forgot password?</a>
                                 </div>
                                 <div class="form-group">
                                     <input type="submit" class="btn btn-primary btn-block btn-lg" name="btn-register" value="Login">
                                 </div>
 
                             </form>
-                            <div class="text-center pt-4">
-                                <p class="m-0 ">Do not have an account? <a href="<%=request.getContextPath()%>/register" class="text-black">Sign Up</a></p>
-                            </div> 
                         </div>
                     </div>
                 </div>
             </div>
-
         </section>
 
+        <!-- JavaScript Libraries -->
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
+        <script>
+            (() => {
+                'use strict'
+                const forms = document.querySelectorAll('.needs-validation')
+                Array.from(forms).forEach(form => {
+                    form.addEventListener('submit', event => {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
 
-
-        <!-- MDB -->
-        <script
-            type="text/javascript"
-            src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.js"
-        ></script>
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+            })()
+            const togglePassword = document.querySelector("#togglePassword");
+            const password = document.querySelector("#password");
+            togglePassword.addEventListener("click", function () {
+                const type = password.getAttribute("type") === "password" ? "text" : "password";
+                password.setAttribute("type", type);
+                this.classList.toggle('fa-eye');
+                this.classList.toggle('fa-eye-slash');
+            });
+            setTimeout(closeAlertModal, 2000)
+            function closeAlertModal() {
+                let modal = document.getElementById("alert");
+                modal.classList.add("fadeOutLeft");
+            }
+        </script>
     </body>
 </html>
 

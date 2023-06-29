@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="6.0" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd">
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
         <servlet-name>Home</servlet-name>
         <servlet-class>Controller.Home</servlet-class>
@@ -15,6 +15,46 @@
     <servlet>
         <servlet-name>AdminHome</servlet-name>
         <servlet-class>Controller.AdminHome</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminCategoryList</servlet-name>
+        <servlet-class>Controller.AdminCategoryList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminCategoryAdd</servlet-name>
+        <servlet-class>Controller.AdminCategoryAdd</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminCategoryUpdate</servlet-name>
+        <servlet-class>Controller.AdminCategoryUpdate</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminCategoryDelete</servlet-name>
+        <servlet-class>Controller.AdminCategoryDelete</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminProductDelete</servlet-name>
+        <servlet-class>Controller.AdminProductDelete</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminProductList</servlet-name>
+        <servlet-class>Controller.AdminProductList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminProductUpdate</servlet-name>
+        <servlet-class>Controller.AdminProductUpdate</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProductDetail</servlet-name>
+        <servlet-class>Controller.ProductDetail</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminCategoryDetail</servlet-name>
+        <servlet-class>Controller.AdminCategoryDetail</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminProductAdd</servlet-name>
+        <servlet-class>Controller.AdminProductAdd</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Home</servlet-name>
@@ -32,4 +72,49 @@
         <servlet-name>AdminHome</servlet-name>
         <url-pattern>/admin</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminCategoryList</servlet-name>
+        <url-pattern>/admin/category</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminCategoryUpdate</servlet-name>
+        <url-pattern>/admin/category/update</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminCategoryDelete</servlet-name>
+        <url-pattern>/admin/category/delete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminProductDelete</servlet-name>
+        <url-pattern>/admin/product/delete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminProductList</servlet-name>
+        <url-pattern>/admin/product</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminProductUpdate</servlet-name>
+        <url-pattern>/admin/product/update</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductDetail</servlet-name>
+        <url-pattern>/product/detail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminCategoryDetail</servlet-name>
+        <url-pattern>/admin/category/detail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminCategoryAdd</servlet-name>
+        <url-pattern>/admin/category/create</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminProductAdd</servlet-name>
+        <url-pattern>/admin/product/create</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
 </web-app>

@@ -4,44 +4,23 @@
  */
 package Controller;
 
+import DaoImpl.CategoryDao;
+import DaoImpl.ProductDao;
+import Model.Category;
+import Model.Product;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author haimi
  */
 public class Home extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Home</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Home at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -53,33 +32,52 @@ public class Home extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+    protected void doGet(
+            HttpServletRequest request,
+            HttpServletResponse response
+    ) throws ServletException, IOException {
+        // DAO import
+        ProductDao productDao = new ProductDao();
+        CategoryDao categoryDao = new CategoryDao();
+        String sort = request.getParameter("sort") != null
+                ? request.getParameter("sort").trim()
+                : "";
+        String name = request.getParameter("search") != null
+                ? request.getParameter("search").trim()
+                : "";
+        int categoryId = request.getParameter("categoryId") != null
+                ? Integer.parseInt(request.getParameter("categoryId"))
+                : 0;
+        int minPrice = request.getParameter("minPrice") != null
+                && !"".equals(request.getParameter("minPrice"))
+                ? Integer.parseInt(request.getParameter("minPrice"))
+                : 0;
+        int maxPrice = request.getParameter("maxPrice") != null
+                && !"".equals(request.getParameter("maxPrice"))
+                ? Integer.parseInt(request.getParameter("maxPrice"))
+                : 0;
+        List<Category> categories = new ArrayList<>();
+        Category all = new Category();
+        all.setId(0);
+        all.setName("Tất cả");
+        categories.add(all);
+        for (Category cat : categoryDao.getAll()) {
+            categories.add(cat);
+        }
+        List<Product> products = productDao.search(
+                sort,
+                categoryId,
+                minPrice,
+                maxPrice,
+                name
+        );
+        request.setAttribute("sort", sort);
+        request.setAttribute("search", name);
+        request.setAttribute("categoryId", categoryId);
+        request.setAttribute("minPrice", minPrice);
+        request.setAttribute("maxPrice", maxPrice);
+        request.setAttribute("categories", categories);
+        request.setAttribute("products", products);
+        request.getRequestDispatcher("product/productList.jsp").forward(request, response);
     }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }
