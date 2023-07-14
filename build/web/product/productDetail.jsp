@@ -43,6 +43,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                         <strong class="text-dark mr-3">Danh mục:</strong>
                         ${product.category.name}
                     </div>
+                    <a href="<%=request.getContextPath()%>/cart/add?pid=${product.getId()}&quantity=1" class="btn btn-warning">ADD TO CART</a>
                 </div>
             </div>
         </div>
@@ -78,13 +79,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                         <div class="d-flex align-items-center justify-content-center mt-2">
                             <a class="h5 text-decoration-none text-truncate" href="<%=request.getContextPath()%>/product/detail?id=${p.id}">${p.name}</a>
                         </div>
-                        <div class="d-flex align-items-center justify-content-center mt-2">
+                        <div class="d-flex align-items-center  flex-column  justify-content-center mt-2">
                             <h6>
                                 <script type="text/javascript">
                                     var str = parseInt(${p.price})
                                     document.write(str.toLocaleString('vi', {style: 'currency', currency: 'VND'}));
                                 </script>
                             </h6>
+                            <a href="<%=request.getContextPath()%>/cart/add?pid=${p.getId()}&quantity=1" class="btn btn-warning">ADD TO CART</a>
                         </div>
                     </div>
                 </div>

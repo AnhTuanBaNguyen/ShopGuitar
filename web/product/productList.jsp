@@ -171,14 +171,14 @@
                                         <div class="d-flex align-items-center justify-content-center mt-2">
                                             <a class="h5 text-decoration-none text-truncate" href="<%=request.getContextPath()%>/product/detail?id=${p.id}">${p.name}</a>
                                         </div>
-                                        <div class="d-flex align-items-center justify-content-center mt-2" style="flex-direction: column;">
+                                            <div class="d-flex align-items-center flex-column justify-content-center mt-2" style="flex-direction: column;">
                                             <h6> 
                                                 <script type="text/javascript">
                                                     var str = parseInt(${p.price})
                                                     document.write(str.toLocaleString('vi', {style: 'currency', currency: 'VND'}));
                                                 </script>
                                             </h6>
-
+                                            <a href="<%=request.getContextPath()%>/cart/add?pid=${p.getId()}&quantity=1" class="btn btn-warning">ADD TO CART</a>
                                         </div>
                                     </div>
                                 </div>

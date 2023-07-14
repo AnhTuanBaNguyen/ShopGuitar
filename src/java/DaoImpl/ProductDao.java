@@ -30,6 +30,32 @@ import java.util.logging.Logger;
  */
 public class ProductDao implements BaseImageDao<Product> {
 
+    public Product getProductById(int id) {
+        DBContext dBContext = new DBContext();
+        Product product = new Product();
+        try {
+            Connection connection = dBContext.getConnection();
+            String sql = "select * from Product where id = " + id;
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                product = new Product(
+                        rs.getInt("id"),
+                        rs.getInt("category_id"),
+                        rs.getString("name"),
+                        rs.getString("description"),
+                        rs.getInt("price"),
+                        rs.getString("image")
+                );
+                product = getCategoryProduct(connection, product);
+            }
+            dBContext.closeConnection(connection, ps, rs);
+        } catch (SQLException e) {
+            Logger.getLogger(Product.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return product;
+    }
+
     public List<Product> search(String sort, int categoryId, int minPrice, int maxPrice, String name) {
         DBContext dBContext = new DBContext();
         List<Product> products = new ArrayList<>();

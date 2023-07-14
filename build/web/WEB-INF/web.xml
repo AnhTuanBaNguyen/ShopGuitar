@@ -56,6 +56,22 @@
         <servlet-name>AdminProductAdd</servlet-name>
         <servlet-class>Controller.AdminProductAdd</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CartAdd</servlet-name>
+        <servlet-class>Controller.CartAdd</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CartList</servlet-name>
+        <servlet-class>Controller.CartList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CartUpdate</servlet-name>
+        <servlet-class>Controller.CartUpdate</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CartDelete</servlet-name>
+        <servlet-class>Controller.CartDelete</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Home</servlet-name>
         <url-pattern>/</url-pattern>
@@ -111,6 +127,22 @@
     <servlet-mapping>
         <servlet-name>AdminProductAdd</servlet-name>
         <url-pattern>/admin/product/create</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CartAdd</servlet-name>
+        <url-pattern>/cart/add</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CartList</servlet-name>
+        <url-pattern>/cart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CartUpdate</servlet-name>
+        <url-pattern>/cart/update</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CartDelete</servlet-name>
+        <url-pattern>/cart/delete</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
